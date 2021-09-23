@@ -234,10 +234,8 @@
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
     <Compile Include="Models\Dtos\Package.cs" />
     <Compile Include="Models\Dtos\PriceUpdate.cs" />
-    <Compile Include="Models\Dtos\RouteReport.cs" />
     <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\Route.cs" />
-    <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\RouteHop.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />
     <Compile Include="Models\EastIndiaModel.Context.cs">
