@@ -12,6 +12,6 @@ namespace EastIndia.Models.Dtos
         public bool IsRecorded { get; set; }
         public bool IsAnimals { get; set; }
         public int Weight { get; set; }
-
+        public DateTime Date { get; set; }
     }
 }

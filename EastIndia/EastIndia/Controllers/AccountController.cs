@@ -449,7 +449,7 @@ namespace EastIndia.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Contact", "Home");
+            return RedirectToAction("Search", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
