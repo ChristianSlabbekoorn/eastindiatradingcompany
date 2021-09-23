@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using EastIndia.Models;
+using EastIndia.Models.Dtos;
 using Flurl.Http;
 using Package = EastIndia.Models.Dtos.Package;
 
@@ -9,7 +10,7 @@ namespace EastIndia.Integrations
 {
     public class IntegrationService
     {
-        public List<object> GetAllRoutes(Package package, Vendor vendor)
+        public List<ExternalRouteDetails> GetAllRoutes(Package package, Vendor vendor)
         {
             try
             {
@@ -20,11 +21,11 @@ namespace EastIndia.Integrations
                 var json = JsonConvert.SerializeObject(package);
                 var res = uri.PostJsonAsync(json).Result;
 
-                return res.GetJsonAsync<List<object>>().Result;
+                return res.GetJsonAsync<List<ExternalRouteDetails>>().Result;
             }
             catch (Exception ex)
             {
-                return new List<object>();
+                return new List<ExternalRouteDetails>();
             }
         }
     }

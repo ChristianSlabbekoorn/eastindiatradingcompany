@@ -283,6 +283,7 @@
       <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PriceCalculator.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
