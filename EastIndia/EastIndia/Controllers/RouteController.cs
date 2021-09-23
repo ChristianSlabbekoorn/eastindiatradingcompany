@@ -1,10 +1,9 @@
-﻿using EastIndia.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
+
+using EastIndia.Managers;
+using EastIndia.Models.Dtos;
 
 namespace EastIndia.Controllers
 {
@@ -20,14 +19,11 @@ namespace EastIndia.Controllers
             return true;
         }
 
-        public bool ChangeSeasonalPrice([FromBody] SeasonalPrice body)
+        public ActionResult ChangePrice([FromBody] PriceUpdate price)
         {
-            return true;
-        }
-
-        public bool ChangeTypePrice([FromBody] PackageTypePrice body)
-        {
-            return true;
+            return PriceManager.UpdatePrice(price) ?
+                new HttpStatusCodeResult(HttpStatusCode.OK) :
+                new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
         }
 
         public RouteDetails[] GetRoutesInfo([FromBody] Package body)
