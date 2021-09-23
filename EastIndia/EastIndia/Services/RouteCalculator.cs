@@ -13,6 +13,7 @@ using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;
 using EastIndia.Helpers;
 using EastIndia.Models;
 using EastIndia.Models.Dtos;
+using RouteHop = EastIndia.Models.Dtos.RouteHop;
 
 namespace EastIndia.Services
 {
@@ -82,10 +83,41 @@ namespace EastIndia.Services
 
             // Locations are: Dakar, St.Helena, Sierre Leone
             List<Location> locations = new List<Location>();
-            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
-            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
-            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Dakar").First());
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "St.Helena").First());
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Sierra Leone").First());
 
+            GetEdges(locations);
+
+        }
+        private List<Edge> GetEdges(List<Location> list)
+        {
+            DbHelper dbHelper = new DbHelper();
+            List<LocationDistance> hops = new List<LocationDistance>();
+            LocationDistance location = dbHelper.Get<LocationDistance>(Guid.NewGuid());
+
+
+            foreach(Location startLoc in list)
+            {
+                foreach (Location endLoc in list) 
+                {
+                    if (startLoc != endLoc)
+                    {
+                        foreach (LocationDistance hop in hops)
+                        {
+                            dbHelper.GetAll<LocationDistance>(x => x.StartLocationID == startLoc.ID && x.EndLocationID == endLoc.ID);
+                            Vertex from = CreateVertex(startLoc.Name);
+                            Vertex to = CreateVertex(endLoc.Name);
+                        }
+                    }
+                }
+            }
+            
+
+
+
+            Edge TokyoOsaka = CreateEdge(Tokyo, Osaka, CreateWeight(7));
+            return null;
         }
     }
 
