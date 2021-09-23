@@ -25,5 +25,7 @@ body {
 input,
 select,
 textarea {
+
     max-width: 100%;
+
 }
