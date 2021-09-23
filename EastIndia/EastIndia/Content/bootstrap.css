@@ -93,6 +93,14 @@ img {
 svg:not(:root) {
   overflow: hidden;
 }
+
+.icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    filter: invert(32%) sepia(18%) saturate(2645%) hue-rotate(118deg) brightness(94%) contrast(103%);
+}
 figure {
   margin: 1em 40px;
 }
@@ -1143,6 +1151,7 @@ img {
 .img-circle {
   border-radius: 50%;
 }
+
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -2767,7 +2776,7 @@ fieldset[disabled] .checkbox label {
 .checkbox-inline input[type="checkbox"] {
   position: absolute;
   margin-top: 4px \9;
-  margin-left: -20px;
+  margin-left: 0;
 }
 .radio + .radio,
 .checkbox + .checkbox {
@@ -3102,25 +3111,26 @@ select[multiple].input-lg {
   }
 }
 .btn {
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 15px 145px;
+    font-size: 14px;
+    line-height: 1.42857143;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 10px;
 }
 .btn:focus,
 .btn:active:focus,
@@ -3158,9 +3168,10 @@ fieldset[disabled] a.btn {
   pointer-events: none;
 }
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+    color: #FFF;
+    font-weight: bold;
+    background-color: #006C4B;
+    border-color: #ccc;
 }
 .btn-default:focus,
 .btn-default.focus {
@@ -4244,6 +4255,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
+    display: none;
 }
 @media (min-width: 768px) {
   .navbar {
