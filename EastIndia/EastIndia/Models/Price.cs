@@ -26,6 +26,7 @@ namespace EastIndia.Models
         public Nullable<decimal> RefrigeratedFee { get; set; }
         public Nullable<decimal> WeaponFee { get; set; }
         public Nullable<decimal> LiveAnimalFee { get; set; }
+        public Nullable<decimal> PricePerSegment { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Package> Packages { get; set; }

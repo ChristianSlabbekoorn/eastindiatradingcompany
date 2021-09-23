@@ -13,10 +13,10 @@ namespace EastIndia.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EastIndiaEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public EastIndiaEntities()
-            : base("name=EastIndiaEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -32,5 +32,6 @@ namespace EastIndia.Models
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<RouteHop> RouteHops { get; set; }
         public virtual DbSet<Weight> Weights { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
     }
 }

@@ -12,18 +12,10 @@ namespace EastIndia.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class RouteHop
+    public partial class ErrorLog
     {
         public System.Guid ID { get; set; }
-        public Nullable<System.Guid> StartLocationID { get; set; }
-        public Nullable<System.Guid> EndLocationID { get; set; }
-        public Nullable<System.Guid> PackageID { get; set; }
-        public Nullable<byte> HopNo { get; set; }
-        public Nullable<byte> TotalHops { get; set; }
-        public Nullable<bool> Shipped { get; set; }
-    
-        public virtual Location EndLocation { get; set; }
-        public virtual Location StartLocation { get; set; }
-        public virtual Package Package { get; set; }
+        public string Error { get; set; }
+        public Nullable<System.DateTime> Timestamp { get; set; }
     }
 }
