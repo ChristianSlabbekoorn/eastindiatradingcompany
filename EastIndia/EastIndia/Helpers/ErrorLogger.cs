@@ -20,7 +20,7 @@ namespace EastIndia.Helpers
 			};
 
 			Console.WriteLine($"[{log.Timestamp}]Error: {log.Error}");
-			DbHelper.Insert(log);
+			new DbHelper().Insert(log);
 		}
 	}
 }
