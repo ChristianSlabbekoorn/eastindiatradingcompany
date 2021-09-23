@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\EastIndia",
+    "\\EastIndia\\EastIndia",
+    "\\EastIndia\\EastIndia\\Controllers",
+    "\\EastIndia\\EastIndia\\Models"
   ],
-  "SelectedNode": "\\C:\\Users\\PIOK\\Source\\Repos\\eastindiatradingcompany",
+  "SelectedNode": "\\EastIndia\\EastIndia\\Controllers\\RouteController.cs",
   "PreviewInSolutionExplorer": false
 }
