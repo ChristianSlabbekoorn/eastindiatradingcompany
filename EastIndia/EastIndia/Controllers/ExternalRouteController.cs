@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EastIndia.Models.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,10 +13,25 @@ namespace EastIndia.Controllers
         [HttpGet]
         public IEnumerable<RouteDetails> GetAllRoutes([FromBody] Package body)
         {
-            return new List<string> 
+            return new List<RouteDetails> 
             {
-                "hello",
-                "world"
+                new RouteDetails() 
+                {
+                    FromCity = Guid.NewGuid(),
+                    ToCity = Guid.NewGuid(),
+                    Distance = 42,
+                    Price = 42,
+                    Time = 42
+
+                },
+                new RouteDetails() 
+                {
+                    FromCity = Guid.NewGuid(),
+                    ToCity = Guid.NewGuid(),
+                    Distance = 42,
+                    Price = 42,
+                    Time = 42
+                }
             };
         }
     }
