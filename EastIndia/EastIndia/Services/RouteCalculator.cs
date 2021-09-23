@@ -61,7 +61,7 @@ namespace EastIndia.Services
 
             PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);
 
-            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(Osaka, Sendai, 100);
+            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(Osaka, Sendai, 1);
 
             List<(string, string)> shortestPaths = new List<(string, string)>();
 
@@ -76,6 +76,7 @@ namespace EastIndia.Services
 
         public void GetAllLocations()
         {
+
         }
     }
 

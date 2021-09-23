@@ -13,6 +13,7 @@ namespace EastIndia.Controllers
         public Route[] CalculateRoute([FromBody] Package body)
         {
             RouteCalculator routeCalculator = new RouteCalculator();
+            routeCalculator.CalculateDistance();
             return new Route[] { new Route(), new Route() };
         }
 
