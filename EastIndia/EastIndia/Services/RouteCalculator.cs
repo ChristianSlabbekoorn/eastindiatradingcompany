@@ -18,7 +18,7 @@ namespace EastIndia.Services
 {
     public class RouteCalculator
     {
-        public void CalculateDistance()
+        public void CalculateDistance(Models.Dtos.Package package)
         {
             PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
 
@@ -72,10 +72,19 @@ namespace EastIndia.Services
                     shortestPaths.Add((edge.StartVertex.VertexId, edge.EndVertex.VertexId));
                 }
             }
+
+            GetAllLocations();
         }
 
         public void GetAllLocations()
         {
+            DbHelper dbHelper = new DbHelper();
+
+            // Locations are: Dakar, St.Helena, Sierre Leone
+            List<Location> locations = new List<Location>();
+            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
+            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
+            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
 
         }
     }

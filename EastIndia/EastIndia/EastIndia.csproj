@@ -254,6 +254,7 @@
     <Compile Include="Managers\PriceManager.cs" />
     <Compile Include="Managers\RouteManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dtos\ConnectionType.cs" />
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
     <Compile Include="Models\Dtos\Package.cs" />
     <Compile Include="Models\Dtos\PriceUpdate.cs" />
