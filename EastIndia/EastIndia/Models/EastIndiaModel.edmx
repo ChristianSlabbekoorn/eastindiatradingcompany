@@ -1,0 +1,584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EastIndiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Error" Type="text" />
+          <Property Name="Timestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="text" />
+          <Property Name="Coastal" Type="bit" />
+        </EntityType>
+        <EntityType Name="LocationDistance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StartLocationID" Type="uniqueidentifier" />
+          <Property Name="EndLocationID" Type="uniqueidentifier" />
+          <Property Name="Segments" Type="tinyint" />
+          <Property Name="ConnectionType" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PriceID" Type="uniqueidentifier" />
+          <Property Name="Fragile" Type="bit" />
+          <Property Name="Refrigerated" Type="bit" />
+          <Property Name="RecordedDelivery" Type="bit" />
+          <Property Name="Weapon" Type="bit" />
+          <Property Name="LiveAnimal" Type="bit" />
+          <Property Name="Weight" Type="numeric" Precision="3" Scale="0" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DayStart" Type="tinyint" />
+          <Property Name="DayEnd" Type="tinyint" />
+          <Property Name="MonthStart" Type="tinyint" />
+          <Property Name="MonthEnd" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WeightID" Type="uniqueidentifier" />
+          <Property Name="PeriodID" Type="uniqueidentifier" />
+          <Property Name="RefrigeratedFee" Type="numeric" Precision="4" Scale="3" />
+          <Property Name="WeaponFee" Type="numeric" Precision="4" Scale="3" />
+          <Property Name="LiveAnimalFee" Type="numeric" Precision="4" Scale="3" />
+          <Property Name="PricePerSegment" Type="numeric" Precision="12" Scale="2" />
+        </EntityType>
+        <EntityType Name="RouteHop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StartLocationID" Type="uniqueidentifier" />
+          <Property Name="EndLocationID" Type="uniqueidentifier" />
+          <Property Name="PackageID" Type="uniqueidentifier" />
+          <Property Name="HopNo" Type="tinyint" />
+          <Property Name="TotalHops" Type="tinyint" />
+          <Property Name="Shipped" Type="bit" />
+        </EntityType>
+        <EntityType Name="Weight">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MinWeight" Type="numeric" Precision="3" Scale="0" />
+          <Property Name="MaxWeight" Type="numeric" Precision="3" Scale="0" />
+        </EntityType>
+        <Association Name="FK_LocationDistance_EndLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="LocationDistance" Type="Self.LocationDistance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationDistance">
+              <PropertyRef Name="EndLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationDistance_StartLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="LocationDistance" Type="Self.LocationDistance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationDistance">
+              <PropertyRef Name="StartLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Price">
+          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PriceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Price_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Price_Weight">
+          <End Role="Weight" Type="Self.Weight" Multiplicity="0..1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weight">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="WeightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteHop_EndLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="RouteHop" Type="Self.RouteHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RouteHop">
+              <PropertyRef Name="EndLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteHop_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="0..1" />
+          <End Role="RouteHop" Type="Self.RouteHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RouteHop">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteHop_StartLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="RouteHop" Type="Self.RouteHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RouteHop">
+              <PropertyRef Name="StartLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EastIndiaModelStoreContainer">
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocationDistance" EntityType="Self.LocationDistance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RouteHop" EntityType="Self.RouteHop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Weight" EntityType="Self.Weight" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_LocationDistance_EndLocation" Association="Self.FK_LocationDistance_EndLocation">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LocationDistance" EntitySet="LocationDistance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationDistance_StartLocation" Association="Self.FK_LocationDistance_StartLocation">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="LocationDistance" EntitySet="LocationDistance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Price" Association="Self.FK_Package_Price">
+            <End Role="Price" EntitySet="Price" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Price_Period" Association="Self.FK_Price_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="Price" EntitySet="Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Price_Weight" Association="Self.FK_Price_Weight">
+            <End Role="Weight" EntitySet="Weight" />
+            <End Role="Price" EntitySet="Price" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteHop_EndLocation" Association="Self.FK_RouteHop_EndLocation">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="RouteHop" EntitySet="RouteHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteHop_Package" Association="Self.FK_RouteHop_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="RouteHop" EntitySet="RouteHop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteHop_StartLocation" Association="Self.FK_RouteHop_StartLocation">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="RouteHop" EntitySet="RouteHop" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EastIndiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Coastal" Type="Boolean" />
+          <NavigationProperty Name="EndLocationDistances" Relationship="Self.FK_LocationDistance_EndLocation" FromRole="Location" ToRole="LocationDistance" />
+          <NavigationProperty Name="StartLocationDistances" Relationship="Self.FK_LocationDistance_StartLocation" FromRole="Location" ToRole="LocationDistance" />
+          <NavigationProperty Name="EndRouteHops" Relationship="Self.FK_RouteHop_EndLocation" FromRole="Location" ToRole="RouteHop" />
+          <NavigationProperty Name="StartRouteHops" Relationship="Self.FK_RouteHop_StartLocation" FromRole="Location" ToRole="RouteHop" />
+        </EntityType>
+        <EntityType Name="LocationDistance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="StartLocationID" Type="Guid" />
+          <Property Name="EndLocationID" Type="Guid" />
+          <Property Name="Segments" Type="Byte" />
+          <Property Name="ConnectionType" Type="Byte" />
+          <NavigationProperty Name="EndLocation" Relationship="Self.FK_LocationDistance_EndLocation" FromRole="LocationDistance" ToRole="Location" />
+          <NavigationProperty Name="StartLocation" Relationship="Self.FK_LocationDistance_StartLocation" FromRole="LocationDistance" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="PriceID" Type="Guid" />
+          <Property Name="Fragile" Type="Boolean" />
+          <Property Name="Refrigerated" Type="Boolean" />
+          <Property Name="RecordedDelivery" Type="Boolean" />
+          <Property Name="Weapon" Type="Boolean" />
+          <Property Name="LiveAnimal" Type="Boolean" />
+          <Property Name="Weight" Type="Decimal" Precision="3" Scale="0" />
+          <NavigationProperty Name="Price" Relationship="Self.FK_Package_Price" FromRole="Package" ToRole="Price" />
+          <NavigationProperty Name="RouteHops" Relationship="Self.FK_RouteHop_Package" FromRole="Package" ToRole="RouteHop" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="DayStart" Type="Byte" />
+          <Property Name="DayEnd" Type="Byte" />
+          <Property Name="MonthStart" Type="Byte" />
+          <Property Name="MonthEnd" Type="Byte" />
+          <NavigationProperty Name="Prices" Relationship="Self.FK_Price_Period" FromRole="Period" ToRole="Price" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="WeightID" Type="Guid" />
+          <Property Name="PeriodID" Type="Guid" />
+          <Property Name="RefrigeratedFee" Type="Decimal" Precision="4" Scale="3" />
+          <Property Name="WeaponFee" Type="Decimal" Precision="4" Scale="3" />
+          <Property Name="LiveAnimalFee" Type="Decimal" Precision="4" Scale="3" />
+          <Property Name="PricePerSegment" Type="Decimal" Precision="12" Scale="2" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_Package_Price" FromRole="Price" ToRole="Package" />
+          <NavigationProperty Name="Period" Relationship="Self.FK_Price_Period" FromRole="Price" ToRole="Period" />
+          <NavigationProperty Name="Weight" Relationship="Self.FK_Price_Weight" FromRole="Price" ToRole="Weight" />
+        </EntityType>
+        <EntityType Name="RouteHop">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="StartLocationID" Type="Guid" />
+          <Property Name="EndLocationID" Type="Guid" />
+          <Property Name="PackageID" Type="Guid" />
+          <Property Name="HopNo" Type="Byte" />
+          <Property Name="TotalHops" Type="Byte" />
+          <Property Name="Shipped" Type="Boolean" />
+          <NavigationProperty Name="EndLocation" Relationship="Self.FK_RouteHop_EndLocation" FromRole="RouteHop" ToRole="Location" />
+          <NavigationProperty Name="StartLocation" Relationship="Self.FK_RouteHop_StartLocation" FromRole="RouteHop" ToRole="Location" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_RouteHop_Package" FromRole="RouteHop" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="Weight">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="MinWeight" Type="Decimal" Precision="3" Scale="0" />
+          <Property Name="MaxWeight" Type="Decimal" Precision="3" Scale="0" />
+          <NavigationProperty Name="Prices" Relationship="Self.FK_Price_Weight" FromRole="Weight" ToRole="Price" />
+        </EntityType>
+        <Association Name="FK_LocationDistance_EndLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="LocationDistance" Type="Self.LocationDistance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationDistance">
+              <PropertyRef Name="EndLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocationDistance_StartLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="LocationDistance" Type="Self.LocationDistance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LocationDistance">
+              <PropertyRef Name="StartLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteHop_EndLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="RouteHop" Type="Self.RouteHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RouteHop">
+              <PropertyRef Name="EndLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteHop_StartLocation">
+          <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
+          <End Role="RouteHop" Type="Self.RouteHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RouteHop">
+              <PropertyRef Name="StartLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Price">
+          <End Role="Price" Type="Self.Price" Multiplicity="0..1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="PriceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RouteHop_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="0..1" />
+          <End Role="RouteHop" Type="Self.RouteHop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RouteHop">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Price_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="PeriodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Price_Weight">
+          <End Role="Weight" Type="Self.Weight" Multiplicity="0..1" />
+          <End Role="Price" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Weight">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Price">
+              <PropertyRef Name="WeightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="LocationDistances" EntityType="Self.LocationDistance" />
+          <EntitySet Name="Packages" EntityType="Self.Package" />
+          <EntitySet Name="Periods" EntityType="Self.Period" />
+          <EntitySet Name="Prices" EntityType="Self.Price" />
+          <EntitySet Name="RouteHops" EntityType="Self.RouteHop" />
+          <EntitySet Name="Weights" EntityType="Self.Weight" />
+          <AssociationSet Name="FK_LocationDistance_EndLocation" Association="Self.FK_LocationDistance_EndLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LocationDistance" EntitySet="LocationDistances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocationDistance_StartLocation" Association="Self.FK_LocationDistance_StartLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="LocationDistance" EntitySet="LocationDistances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteHop_EndLocation" Association="Self.FK_RouteHop_EndLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="RouteHop" EntitySet="RouteHops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteHop_StartLocation" Association="Self.FK_RouteHop_StartLocation">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="RouteHop" EntitySet="RouteHops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Price" Association="Self.FK_Package_Price">
+            <End Role="Price" EntitySet="Prices" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RouteHop_Package" Association="Self.FK_RouteHop_Package">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="RouteHop" EntitySet="RouteHops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Price_Period" Association="Self.FK_Price_Period">
+            <End Role="Period" EntitySet="Periods" />
+            <End Role="Price" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Price_Weight" Association="Self.FK_Price_Weight">
+            <End Role="Weight" EntitySet="Weights" />
+            <End Role="Price" EntitySet="Prices" />
+          </AssociationSet>
+          <EntitySet Name="ErrorLogs" EntityType="EastIndiaModel.ErrorLog" />
+        </EntityContainer>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EastIndiaModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="EastIndiaModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Coastal" ColumnName="Coastal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocationDistances">
+            <EntityTypeMapping TypeName="EastIndiaModel.LocationDistance">
+              <MappingFragment StoreEntitySet="LocationDistance">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StartLocationID" ColumnName="StartLocationID" />
+                <ScalarProperty Name="EndLocationID" ColumnName="EndLocationID" />
+                <ScalarProperty Name="Segments" ColumnName="Segments" />
+                <ScalarProperty Name="ConnectionType" ColumnName="ConnectionType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="EastIndiaModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PriceID" ColumnName="PriceID" />
+                <ScalarProperty Name="Fragile" ColumnName="Fragile" />
+                <ScalarProperty Name="Refrigerated" ColumnName="Refrigerated" />
+                <ScalarProperty Name="RecordedDelivery" ColumnName="RecordedDelivery" />
+                <ScalarProperty Name="Weapon" ColumnName="Weapon" />
+                <ScalarProperty Name="LiveAnimal" ColumnName="LiveAnimal" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periods">
+            <EntityTypeMapping TypeName="EastIndiaModel.Period">
+              <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DayStart" ColumnName="DayStart" />
+                <ScalarProperty Name="DayEnd" ColumnName="DayEnd" />
+                <ScalarProperty Name="MonthStart" ColumnName="MonthStart" />
+                <ScalarProperty Name="MonthEnd" ColumnName="MonthEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="EastIndiaModel.Price">
+              <MappingFragment StoreEntitySet="Price">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="WeightID" ColumnName="WeightID" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="RefrigeratedFee" ColumnName="RefrigeratedFee" />
+                <ScalarProperty Name="WeaponFee" ColumnName="WeaponFee" />
+                <ScalarProperty Name="LiveAnimalFee" ColumnName="LiveAnimalFee" />
+                <ScalarProperty Name="PricePerSegment" ColumnName="PricePerSegment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteHops">
+            <EntityTypeMapping TypeName="EastIndiaModel.RouteHop">
+              <MappingFragment StoreEntitySet="RouteHop">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StartLocationID" ColumnName="StartLocationID" />
+                <ScalarProperty Name="EndLocationID" ColumnName="EndLocationID" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="HopNo" ColumnName="HopNo" />
+                <ScalarProperty Name="TotalHops" ColumnName="TotalHops" />
+                <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Weights">
+            <EntityTypeMapping TypeName="EastIndiaModel.Weight">
+              <MappingFragment StoreEntitySet="Weight">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MinWeight" ColumnName="MinWeight" />
+                <ScalarProperty Name="MaxWeight" ColumnName="MaxWeight" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="EastIndiaModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Error" ColumnName="Error" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
