@@ -252,6 +252,7 @@
     <Compile Include="Helpers\ErrorLogger.cs" />
     <Compile Include="Helpers\IDbHelper.cs" />
     <Compile Include="Managers\PriceManager.cs" />
+    <Compile Include="Managers\RouteManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
     <Compile Include="Models\Dtos\Package.cs" />
