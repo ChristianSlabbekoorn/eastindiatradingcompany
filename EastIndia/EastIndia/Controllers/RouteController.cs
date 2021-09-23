@@ -7,9 +7,6 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 
-using EastIndia.Managers;
-using EastIndia.Models.Dtos;
-
 namespace EastIndia.Controllers
 {
     public class RouteController : Controller
@@ -27,11 +24,14 @@ namespace EastIndia.Controllers
             return true;
         }
 
-        public ActionResult ChangePrice([FromBody] PriceUpdate price)
+        public bool ChangeSeasonalPrice([FromBody] SeasonalPrice body)
         {
-            return PriceManager.UpdatePrice(price) ?
-                new HttpStatusCodeResult(HttpStatusCode.OK) :
-                new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            return true;
+        }
+
+        public bool ChangeTypePrice([FromBody] PackageTypePrice body)
+        {
+            return true;
         }
 
         public RouteDetails[] GetRoutesInfo([FromBody] Package body)

@@ -22,8 +22,8 @@ namespace EastIndia.Models
         public Nullable<byte> TotalHops { get; set; }
         public Nullable<bool> Shipped { get; set; }
     
-        public virtual Location EndLocation { get; set; }
-        public virtual Location StartLocation { get; set; }
+        public virtual Location EndLocations { get; set; }
+        public virtual Location StartLocations { get; set; }
         public virtual Package Package { get; set; }
     }
 }
