@@ -16,7 +16,7 @@ namespace EastIndia.Integrations
             {
                 var uri = vendor == Vendor.TelstarLogistics ? 
                     "http://wa-eit-dk1.azurewebsites.net/api/getAllRoutes" :
-                    "http://wa-oa-dk1.azurewebsites.net/api/getAllRoutes";
+                    "http://wa-oa-dk1.azurewebsites.net/api/integration";
                 
                 var json = JsonConvert.SerializeObject(package);
                 var res = uri.PostJsonAsync(json).Result;
