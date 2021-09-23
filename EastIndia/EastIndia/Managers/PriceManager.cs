@@ -6,13 +6,20 @@ namespace EastIndia.Managers
 {
 	public class PriceManager
 	{
-		public static bool UpdatePrice(PriceUpdate priceUpdate)
+		private readonly IDbHelper _dbHelper;
+		
+		public PriceManager(IDbHelper dbHelper)
 		{
-			var price = DbHelper.Get<Price>(priceUpdate.ID);
+			_dbHelper = dbHelper;
+		}
+
+		public bool UpdatePrice(PriceUpdate priceUpdate)
+		{
+			var price = _dbHelper.Get<Price>(priceUpdate.ID);
 			if (price is null) return false;
 
 			price.PricePerSegment = priceUpdate.Price;
-			return DbHelper.Update(price.ID, price);
+			return _dbHelper.Update(price.ID, price);
 		}
 	}
 }

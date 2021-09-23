@@ -7,21 +7,21 @@ using EastIndia.Models;
 
 namespace EastIndia.Helpers
 {
-	public class DbHelper
+	public class DbHelper : IDbHelper
 	{
 		private static readonly Entities entities = new Entities();
 
-		public static T Get<T>(Guid id) where T : class
+		public T Get<T>(Guid id) where T : class
 		{
 			return entities.Set<T>().Find(id);
 		}
 
-		public static List<T> GetAll<T>(Expression<Func<T, bool>> predicate) where T : class
+		public List<T> GetAll<T>(Expression<Func<T, bool>> predicate) where T : class
 		{
 			return entities.Set<T>().Where(predicate).ToList();
 		}
 
-		public static bool Insert<T>(T entity) where T : class
+		public bool Insert<T>(T entity) where T : class
 		{
 			try
 			{
@@ -36,7 +36,7 @@ namespace EastIndia.Helpers
 			}
 		}
 
-		public static bool Update<T>(Guid oldEntityId, T newEntityValues) where T : class
+		public bool Update<T>(Guid oldEntityId, T newEntityValues) where T : class
 		{
 			try
 			{
@@ -52,7 +52,7 @@ namespace EastIndia.Helpers
 			}
 		}
 
-		public static bool Remove<T>(Guid id) where T : class
+		public bool Remove<T>(Guid id) where T : class
 		{
 			try
 			{
