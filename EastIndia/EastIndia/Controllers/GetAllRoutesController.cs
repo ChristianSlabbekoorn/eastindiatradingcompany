@@ -8,8 +8,9 @@ using System.Web.Http;
 
 namespace EastIndia.Controllers
 {
-    public class ExternalRouteController : ApiController
+    public class GetAllRoutesController : ApiController
     {
+        /*
         [HttpGet]
         public IEnumerable<ExternalRouteDetails> GetAllRoutes([FromBody] Package body)
         {
@@ -31,10 +32,10 @@ namespace EastIndia.Controllers
                     Duration = 42.ToString()
                 }
             };
-        }
+        }*/
 
         [HttpPost]
-        public IEnumerable<ExternalRouteDetails> RequestAllRoutes([FromBody] Package body)
+        public IEnumerable<ExternalRouteDetails> GetAllRoutes([FromBody] Package body)
         {
             return new List<ExternalRouteDetails>
             {
