@@ -14,55 +14,32 @@ using EastIndia.Helpers;
 using EastIndia.Models;
 using EastIndia.Models.Dtos;
 using RouteHop = EastIndia.Models.Dtos.RouteHop;
+using Package = EastIndia.Models.Dtos.Package;
 
 namespace EastIndia.Services
 {
     public class RouteCalculator
     {
-        public void CalculateDistance(Models.Dtos.Package package)
+        public ExternalRouteDetails[] CalculateRoutes(Package package)
+        {
+            List<Location> locations = GetLocations(package);
+
+            (List<(Vertex, Vertex)>, List<Edge>) verticesAndEdges = GetEdges(locations);
+
+            CalculateDistance(verticesAndEdges);
+
+            return null;
+        }
+
+        public void CalculateDistance((List<(Vertex, Vertex)>, List<Edge>) verticesAndEdges)
         {
             PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
 
-            Vertex Tokyo = CreateVertex("Tokyo");
-            Vertex Osaka = CreateVertex("Osaka");
-            Vertex Kyoto = CreateVertex("Kyoto");
-            Vertex Sendai = CreateVertex("Sendai");
-
-            Edge TokyoOsaka = CreateEdge(Tokyo, Osaka, CreateWeight(7));
-            Edge TokyoKyoto = CreateEdge(Tokyo, Kyoto, CreateWeight(6));
-            Edge TokyoSendai = CreateEdge(Tokyo, Sendai, CreateWeight(4));
-            Edge OsakaKyoto = CreateEdge(Osaka, Kyoto, CreateWeight(3));
-            Edge OsakaSendai = CreateEdge(Osaka, Sendai, CreateWeight(9));
-            Edge KyotoSendai = CreateEdge(Kyoto, Sendai, CreateWeight(8));
-
-            Edge OsakaTokyo = CreateEdge(Osaka, Tokyo, CreateWeight(7));
-            Edge KyotoTokyo = CreateEdge(Kyoto, Tokyo, CreateWeight(6));
-            Edge SendaiTokyo = CreateEdge(Sendai, Tokyo, CreateWeight(4));
-            Edge KyotoOsaka = CreateEdge(Kyoto, Osaka, CreateWeight(3));
-            Edge SendaiOsaka = CreateEdge(Sendai, Osaka, CreateWeight(9));
-            Edge SendaiKyoto = CreateEdge(Sendai, Kyoto, CreateWeight(8));
-
-            IList<Edge> edges = new List<Edge>()
-            {
-                TokyoOsaka,
-                TokyoKyoto,
-                TokyoSendai,
-                OsakaKyoto,
-                OsakaSendai,
-                KyotoSendai,
-                OsakaTokyo,
-                KyotoTokyo,
-                SendaiTokyo,
-                KyotoOsaka,
-                SendaiOsaka,
-                SendaiKyoto
-            };
-
-            Graph graph = CreateGraph(edges);
+            Graph graph = CreateGraph(verticesAndEdges.Item2);
 
             PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);
 
-            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(Osaka, Sendai, 1);
+            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(verticesAndEdges.Item1.First().Item1, verticesAndEdges.Item1.First().Item2, 5);
 
             List<(string, string)> shortestPaths = new List<(string, string)>();
 
@@ -74,50 +51,48 @@ namespace EastIndia.Services
                 }
             }
 
-            GetAllLocations();
+            
         }
 
-        public void GetAllLocations()
+        public List<Location> GetLocations(Package package)
         {
             DbHelper dbHelper = new DbHelper();
 
-            // Locations are: Dakar, St.Helena, Sierre Leone
-            List<Location> locations = new List<Location>();
-            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Dakar").First());
-            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "St.Helena").First());
-            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Sierra Leone").First());
-
-            GetEdges(locations);
-
+            return dbHelper.GetAll<Location>(x => x.Name != null);
         }
-        private List<Edge> GetEdges(List<Location> list)
+        private (List<(Vertex, Vertex)>, List<Edge>) GetEdges(List<Location> locations)
         {
             DbHelper dbHelper = new DbHelper();
+            List<(Vertex, Vertex)> vertices = new List<(Vertex, Vertex)>();
             List<LocationDistance> hops = new List<LocationDistance>();
             LocationDistance location = dbHelper.Get<LocationDistance>(Guid.NewGuid());
 
-
-            foreach(Location startLoc in list)
+            foreach(Location startLoc in locations)
             {
-                foreach (Location endLoc in list) 
+                foreach (Location endLoc in locations) 
                 {
                     if (startLoc != endLoc)
                     {
-                        foreach (LocationDistance hop in hops)
+                        LocationDistance locationDistance = dbHelper.GetAll<LocationDistance>(x => x.StartLocationID == startLoc.ID && x.EndLocationID == endLoc.ID).FirstOrDefault();
+                        if (locationDistance != null) 
                         {
-                            dbHelper.GetAll<LocationDistance>(x => x.StartLocationID == startLoc.ID && x.EndLocationID == endLoc.ID);
+                            hops.Add(locationDistance);
                             Vertex from = CreateVertex(startLoc.Name);
                             Vertex to = CreateVertex(endLoc.Name);
+                            vertices.Add((from, to));
                         }
                     }
                 }
             }
-            
 
+            List<Edge> edges = new List<Edge>();
 
+            foreach (LocationDistance hop in hops)
+            {
+                edges.Add(CreateEdge(CreateVertex(hop.StartLocation.Name), CreateVertex(hop.EndLocation.Name), CreateWeight(Convert.ToDouble(hop.Segments))));
+            }
 
-            Edge TokyoOsaka = CreateEdge(Tokyo, Osaka, CreateWeight(7));
-            return null;
+            return (vertices, edges);
         }
     }
 

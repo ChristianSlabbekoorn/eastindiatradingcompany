@@ -14,7 +14,7 @@ namespace EastIndia.Controllers
         public ExternalRouteDetails[] CalculateRoute([FromBody] Package body)
         {
             RouteCalculator routeCalculator = new RouteCalculator();
-            routeCalculator.CalculateDistance(body);
+            routeCalculator.CalculateRoutes(body);
             return new ExternalRouteDetails[] { new ExternalRouteDetails(), new ExternalRouteDetails() };
         }
 
