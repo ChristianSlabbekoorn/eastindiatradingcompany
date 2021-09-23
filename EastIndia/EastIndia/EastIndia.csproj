@@ -187,8 +187,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dtos\PackageTypePrice.cs" />
+    <Compile Include="Models\Dtos\SeasonalPrice.cs" />
+    <Compile Include="Models\Dtos\RouteReport.cs" />
+    <Compile Include="Models\Dtos\RouteDetails.cs" />
+    <Compile Include="Models\Dtos\Route.cs" />
+    <Compile Include="Models\Dtos\Package.cs" />
+    <Compile Include="Models\Dtos\RouteHop.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
