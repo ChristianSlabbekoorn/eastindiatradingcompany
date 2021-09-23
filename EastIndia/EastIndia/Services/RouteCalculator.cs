@@ -18,7 +18,7 @@ namespace EastIndia.Services
 {
     public class RouteCalculator
     {
-        public void CalculateDistance()
+        public void CalculateDistance(Models.Dtos.Package package)
         {
             PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
 
@@ -72,11 +72,14 @@ namespace EastIndia.Services
                     shortestPaths.Add((edge.StartVertex.VertexId, edge.EndVertex.VertexId));
                 }
             }
+
         }
 
         public void GetAllLocations()
         {
+            DbHelper dbHelper = new DbHelper();
 
+            
         }
     }
 
