@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text;
 using Programmerare.ShortestPaths.Core.Api;
 using Programmerare.ShortestPaths.Adapter.Bsmock;
 using Programmerare.ShortestPaths.Adapter.YanQi;
-using static Programmerare.ShortestPaths.Core.Impl.VertexImpl;	// CreateVertex
-using static Programmerare.ShortestPaths.Core.Impl.WeightImpl;	// CreateWeight
-using static Programmerare.ShortestPaths.Core.Impl.EdgeImpl;	// CreateEdge
-using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;   // CreateGraph
-using System.Text;
+using static Programmerare.ShortestPaths.Core.Impl.VertexImpl;	
+using static Programmerare.ShortestPaths.Core.Impl.WeightImpl;	
+using static Programmerare.ShortestPaths.Core.Impl.EdgeImpl;	
+using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;  
 
 namespace EastIndia.Services
 {
