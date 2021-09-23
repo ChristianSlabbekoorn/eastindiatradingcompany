@@ -73,13 +73,19 @@ namespace EastIndia.Services
                 }
             }
 
+            GetAllLocations();
         }
 
         public void GetAllLocations()
         {
             DbHelper dbHelper = new DbHelper();
 
-            
+            // Locations are: Dakar, St.Helena, Sierre Leone
+            List<Location> locations = new List<Location>();
+            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
+            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
+            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
+
         }
     }
 
