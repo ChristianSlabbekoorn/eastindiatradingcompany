@@ -40,6 +40,34 @@
     background-color: #eee;
 }
 
+.mourphism {
+    padding-bottom: 45px;
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 50px;
+    background: #e6e6e6;
+    box-shadow: 20px 20px 60px #c4c4c4, -20px -20px 60px #ffffff;
+}
+
+
+.place-l {
+    text-align: left;
+    display: inline-block;
+
+}
+
+.place-r {
+    text-align: right;
+    display: inline-block;
+    float: right;
+}
+
+.time {
+    text-align: center;
+    font-weight:bold;
+}
+
 /* On mouse-over, add a grey background color */
 .containertype:hover input ~ .checkmark {
     background-color: #ccc;
@@ -1227,6 +1255,19 @@ img {
 }
 .img-circle {
   border-radius: 50%;
+}
+
+.price {
+    display: inline-block;
+    color: #3c763d;
+    padding: 2px 20px;
+        font-weight: bold;
+}
+
+.timeline {
+    width: 90%;
+    display: block;
+    margin: auto;
 }
 
 hr {
@@ -3203,6 +3244,27 @@ select[multiple].input-lg {
     font-size: 14px;
     line-height: 1.42857143;
 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 10px;
+}
+.btn-m {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 15px 30px;
+    font-size: 14px;
+    line-height: 1.42857143;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
