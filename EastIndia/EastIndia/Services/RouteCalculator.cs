@@ -9,7 +9,10 @@ using Programmerare.ShortestPaths.Adapter.YanQi;
 using static Programmerare.ShortestPaths.Core.Impl.VertexImpl;	
 using static Programmerare.ShortestPaths.Core.Impl.WeightImpl;	
 using static Programmerare.ShortestPaths.Core.Impl.EdgeImpl;	
-using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;  
+using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;
+using EastIndia.Helpers;
+using EastIndia.Models;
+using EastIndia.Models.Dtos;
 
 namespace EastIndia.Services
 {
@@ -73,7 +76,11 @@ namespace EastIndia.Services
 
         public void GetAllLocations()
         {
-            
+                var price = DbHelper.Get<Price>(priceUpdate.ID);
+                if (price is null) return false;
+
+                price.PricePerSegment = priceUpdate.Price;
+                return DbHelper.Update(price.ID, price);
         }
     }
 
