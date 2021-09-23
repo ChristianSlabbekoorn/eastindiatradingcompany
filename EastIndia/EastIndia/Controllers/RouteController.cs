@@ -1,18 +1,21 @@
-﻿using EastIndia.Models.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
+
+using EastIndia.Helpers;
+using EastIndia.Managers;
+using EastIndia.Models.Dtos;
+using EastIndia.Services;
 
 namespace EastIndia.Controllers
 {
     public class RouteController : Controller
     {
-        public Route[] CalculateRoute([FromBody] Package body)
+        public ExternalRouteDetails[] CalculateRoute([FromBody] Package body)
         {
-            return new Route[] { new Route(), new Route() };
+            RouteCalculator routeCalculator = new RouteCalculator();
+            routeCalculator.CalculateDistance(body);
+            return new ExternalRouteDetails[] { new ExternalRouteDetails(), new ExternalRouteDetails() };
         }
 
         public bool GenerateFile([FromBody] RouteReport body)
@@ -20,14 +23,12 @@ namespace EastIndia.Controllers
             return true;
         }
 
-        public bool ChangeSeasonalPrice([FromBody] SeasonalPrice body)
+        public ActionResult ChangePrice([FromBody] PriceUpdate price)
         {
-            return true;
-        }
-
-        public bool ChangeTypePrice([FromBody] PackageTypePrice body)
-        {
-            return true;
+            var manager = new PriceManager(new DbHelper());
+            return manager.UpdatePrice(price) ?
+                new HttpStatusCodeResult(HttpStatusCode.OK) :
+                new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
         }
 
         public RouteDetails[] GetRoutesInfo([FromBody] Package body)

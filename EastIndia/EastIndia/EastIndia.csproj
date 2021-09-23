@@ -45,12 +45,73 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.3.0.2\lib\net472\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.3.2.0\lib\net472\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Priority Queue, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.1.1\lib\net45\Priority Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptee.Bsmock, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptee.Bsmock.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptee.YanQi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptee.YanQi.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptees.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptees.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adapter.Bsmock, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adapter.Bsmock.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adapter.YanQi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adapter.YanQi.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.5.0.0\lib\net461\System.Net.Http.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WinHttpHandler, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.WinHttpHandler.5.0.0\lib\net461\System.Net.Http.WinHttpHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.5.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.5.0.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -192,14 +253,31 @@
     </Compile>
     <Compile Include="Helpers\DbHelper.cs" />
     <Compile Include="Helpers\ErrorLogger.cs" />
+    <Compile Include="Helpers\IDbHelper.cs" />
+    <Compile Include="Integrations\IntegrationService.cs" />
+    <Compile Include="Managers\PriceManager.cs" />
+    <Compile Include="Managers\RouteManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dtos\ConnectionType.cs" />
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
-    <Compile Include="Models\Dtos\PackageTypePrice.cs" />
-    <Compile Include="Models\Dtos\SeasonalPrice.cs" />
+    <Compile Include="Models\Dtos\ExternalPackage.cs" />
+    <Compile Include="Models\Dtos\Package.cs" />
+    <Compile Include="Models\Dtos\PriceUpdate.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />
     <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\Route.cs" />
-    <Compile Include="Models\Dtos\Package.cs" />
     <Compile Include="Models\Dtos\RouteHop.cs" />
     <Compile Include="Models\EastIndiaModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -236,6 +314,7 @@
     <Compile Include="Models\Price.cs">
       <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Vendor.cs" />
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\RouteHop.cs">
       <DependentUpon>EastIndiaModel.tt</DependentUpon>
@@ -244,6 +323,8 @@
       <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PriceCalculator.cs" />
+    <Compile Include="Services\RouteCalculator.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +412,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Admin\Search.cshtml" />
     <Content Include="Views\Admin\Confirmation.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Route\" />

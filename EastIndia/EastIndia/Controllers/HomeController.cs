@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace EastIndia.Controllers
 {
@@ -23,6 +19,18 @@ namespace EastIndia.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Confirmation()
+        {
+            ViewBag.Message = "Confirmation shipping page.";
+
+            return View();
+        }
+        public ActionResult Search()
+        {
+            ViewBag.Message = "Search routes page.";
 
             return View();
         }
