@@ -32,5 +32,28 @@ namespace EastIndia.Controllers
                 }
             };
         }
+
+        [HttpPost]
+        public IEnumerable<ExternalRouteDetails> RequestAllRoutes([FromBody] Package body)
+        {
+            return new List<ExternalRouteDetails>
+            {
+                new ExternalRouteDetails()
+                {
+                    Start = "St. Helena",
+                    Stop = "Kapstaden",
+                    Price = 42.ToString(),
+                    Duration = 42.ToString()
+
+                },
+                new ExternalRouteDetails()
+                {
+                    Start = "Congo",
+                    Stop = "Wadai",
+                    Price = 42.ToString(),
+                    Duration = 42.ToString()
+                }
+            };
+        }
     }
 }
