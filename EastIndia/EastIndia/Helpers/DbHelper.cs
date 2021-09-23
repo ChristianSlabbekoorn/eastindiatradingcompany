@@ -5,7 +5,7 @@ namespace EastIndia.Helpers
 {
 	public class DbHelper
 	{
-		private static readonly EastIndiaEntities entities = new EastIndiaEntities();
+		private static readonly Entities entities = new Entities();
 
 		public static bool Insert<T>(T entity) where T : class
 		{

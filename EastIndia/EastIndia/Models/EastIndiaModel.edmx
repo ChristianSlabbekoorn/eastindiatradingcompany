@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="EastIndiaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ErrorLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -185,6 +183,7 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EastIndiaModelStoreContainer">
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LocationDistance" EntityType="Self.LocationDistance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
@@ -192,13 +191,6 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <EntitySet Name="Price" EntityType="Self.Price" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RouteHop" EntityType="Self.RouteHop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Weight" EntityType="Self.Weight" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [ErrorLog].[ID] AS [ID], 
-    [ErrorLog].[Error] AS [Error], 
-    [ErrorLog].[Timestamp] AS [Timestamp]
-    FROM [dbo].[ErrorLog] AS [ErrorLog]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_LocationDistance_EndLocation" Association="Self.FK_LocationDistance_EndLocation">
             <End Role="Location" EntitySet="Location" />
             <End Role="LocationDistance" EntitySet="LocationDistance" />
@@ -300,7 +292,6 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <NavigationProperty Name="Packages" Relationship="Self.FK_Package_Price" FromRole="Price" ToRole="Package" />
           <NavigationProperty Name="Period" Relationship="Self.FK_Price_Period" FromRole="Price" ToRole="Period" />
           <NavigationProperty Name="Weight" Relationship="Self.FK_Price_Weight" FromRole="Price" ToRole="Weight" />
-          <Property Name="PricePerSegment" Type="Decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="RouteHop">
           <Key>
@@ -325,14 +316,6 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <Property Name="MinWeight" Type="Decimal" Precision="3" Scale="0" />
           <Property Name="MaxWeight" Type="Decimal" Precision="3" Scale="0" />
           <NavigationProperty Name="Prices" Relationship="Self.FK_Price_Weight" FromRole="Weight" ToRole="Price" />
-        </EntityType>
-        <EntityType Name="ErrorLog">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Timestamp" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_LocationDistance_EndLocation">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
@@ -438,7 +421,6 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <EntitySet Name="Prices" EntityType="Self.Price" />
           <EntitySet Name="RouteHops" EntityType="Self.RouteHop" />
           <EntitySet Name="Weights" EntityType="Self.Weight" />
-          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
           <AssociationSet Name="FK_LocationDistance_EndLocation" Association="Self.FK_LocationDistance_EndLocation">
             <End Role="Location" EntitySet="Locations" />
             <End Role="LocationDistance" EntitySet="LocationDistances" />
@@ -535,7 +517,6 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <EntitySetMapping Name="Prices">
             <EntityTypeMapping TypeName="EastIndiaModel.Price">
               <MappingFragment StoreEntitySet="Price">
-                <ScalarProperty Name="PricePerSegment" ColumnName="PricePerSegment" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="WeightID" ColumnName="WeightID" />
                 <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
