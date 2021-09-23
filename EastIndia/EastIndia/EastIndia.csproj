@@ -49,8 +49,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -183,14 +181,17 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ExternalRouteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RouteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DbHelper.cs" />
     <Compile Include="Helpers\ErrorLogger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
     <Compile Include="Models\Dtos\PackageTypePrice.cs" />
     <Compile Include="Models\Dtos\SeasonalPrice.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />
@@ -217,12 +218,6 @@
       <DependentUpon>EastIndiaEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Location.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LocationDistance.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Package.cs">
       <DependentUpon>EastIndiaEntities.tt</DependentUpon>
@@ -256,25 +251,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\EastIndiaEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EastIndiaEntities.edmx</DependentUpon>
-      <LastGenOutput>EastIndiaEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EastIndiaEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EastIndiaEntities.edmx</DependentUpon>
-      <LastGenOutput>EastIndiaEntities.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EastIndiaEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EastIndiaEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EastIndiaEntities.edmx.diagram">
-      <DependentUpon>EastIndiaEntities.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\wa-eit-dk1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\wa-eit-dk1 - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\wa-eit-dk1 - Web Deploy.pubxml" />
@@ -325,7 +303,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Folder Include="Views\Route\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
