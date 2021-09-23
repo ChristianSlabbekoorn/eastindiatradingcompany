@@ -22,5 +22,17 @@ namespace EastIndia.Controllers
 
             return View();
         }
+        public ActionResult Confirmation()
+        {
+            ViewBag.Message = "Confirmation shipping page.";
+
+            return View();
+        }
+        public ActionResult Search()
+        {
+            ViewBag.Message = "Search routes page.";
+
+            return View();
+        }
     }
 }

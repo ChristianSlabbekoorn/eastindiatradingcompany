@@ -88,6 +88,9 @@
     <Reference Include="System.Net.Http.Json, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.Json.5.0.0\lib\net461\System.Net.Http.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http.WinHttpHandler, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.WinHttpHandler.5.0.0\lib\net461\System.Net.Http.WinHttpHandler.dll</HintPath>
+    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -251,11 +254,25 @@
     <Compile Include="Helpers\DbHelper.cs" />
     <Compile Include="Helpers\ErrorLogger.cs" />
     <Compile Include="Helpers\IDbHelper.cs" />
+    <Compile Include="Integrations\IntegrationService.cs" />
     <Compile Include="Managers\PriceManager.cs" />
     <Compile Include="Managers\RouteManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Dtos\ConnectionType.cs" />
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
+    <Compile Include="Models\Dtos\ExternalPackage.cs" />
     <Compile Include="Models\Dtos\Package.cs" />
     <Compile Include="Models\Dtos\PriceUpdate.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />
@@ -393,6 +410,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Admin\Search.cshtml" />
     <Content Include="Views\Admin\Confirmation.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\Confirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Route\" />
