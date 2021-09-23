@@ -7,6 +7,11 @@ namespace EastIndia.Helpers
 	{
 		private static readonly Entities entities = new Entities();
 
+		public static T Get<T>(Guid id) where T : class
+		{
+			return entities.Set<T>().Find(id);
+		}
+
 		public static bool Insert<T>(T entity) where T : class
 		{
 			try
