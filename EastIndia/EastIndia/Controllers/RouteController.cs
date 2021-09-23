@@ -4,6 +4,7 @@ using System.Web.Mvc;
 
 using EastIndia.Managers;
 using EastIndia.Models.Dtos;
+using EastIndia.Services;
 
 namespace EastIndia.Controllers
 {
@@ -11,6 +12,7 @@ namespace EastIndia.Controllers
     {
         public Route[] CalculateRoute([FromBody] Package body)
         {
+            RouteCalculator routeCalculator = new RouteCalculator();
             return new Route[] { new Route(), new Route() };
         }
 
