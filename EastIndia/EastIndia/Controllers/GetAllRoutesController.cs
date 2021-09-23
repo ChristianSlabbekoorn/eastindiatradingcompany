@@ -29,8 +29,8 @@ namespace EastIndia.Controllers
             const string kapStMarie = "Kap St.Marie";
             const string kapstaden = "Kapstaden";
             const string hvalbugten = "Hvalbugten";
-            const string slaveKysten = "Slave-Kysten";
-            const string guldKysten = "Guld-Kysten";
+            const string slaveKysten = "Slavekysten";
+            const string guldKysten = "Guld Kysten";
             const string sierraLeone = "Sierra Leone";
             const string stHelena = "St.Helena";
             const string deKanariskeOeer = "De Kanariske Oeer";
