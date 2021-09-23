@@ -10,16 +10,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Error" Type="text" />
           <Property Name="Timestamp" Type="datetime" />
+          <Property Name="Error" Type="varchar" MaxLength="8000" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="text" />
           <Property Name="Coastal" Type="bit" />
+          <Property Name="Name" Type="varchar" MaxLength="99" />
         </EntityType>
         <EntityType Name="LocationDistance">
           <Key>
@@ -233,7 +233,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="99" FixedLength="false" Unicode="false" />
           <Property Name="Coastal" Type="Boolean" />
           <NavigationProperty Name="EndLocationDistances" Relationship="Self.FK_LocationDistance_EndLocation" FromRole="Location" ToRole="LocationDistance" />
           <NavigationProperty Name="StartLocationDistances" Relationship="Self.FK_LocationDistance_StartLocation" FromRole="Location" ToRole="LocationDistance" />
@@ -460,7 +460,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Error" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="Timestamp" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
