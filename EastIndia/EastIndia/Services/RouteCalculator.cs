@@ -70,6 +70,11 @@ namespace EastIndia.Services
                 }
             }
         }
+
+        public void GetAllLocations()
+        {
+            
+        }
     }
 
     public static class MyExtensionMethods
