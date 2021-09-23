@@ -55,6 +55,27 @@
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Priority Queue, Version=4.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.1.1\lib\net45\Priority Queue.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptee.Bsmock, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptee.Bsmock.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptee.YanQi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptee.YanQi.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adaptees.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adaptees.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adapter.Bsmock, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adapter.Bsmock.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Adapter.YanQi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Adapter.YanQi.dll</HintPath>
+    </Reference>
+    <Reference Include="Programmerare.ShortestPaths.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Programmerare.ShortestPaths.1.0.0\lib\net40\Programmerare.ShortestPaths.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -238,9 +259,7 @@
     <Compile Include="Models\Dtos\RouteReport.cs" />
     <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\Route.cs" />
-    <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\RouteHop.cs" />
-    <Compile Include="Models\Dtos\RouteReport.cs" />
     <Compile Include="Models\EastIndiaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -286,6 +305,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PriceCalculator.cs" />
+    <Compile Include="Services\RouteCalculator.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

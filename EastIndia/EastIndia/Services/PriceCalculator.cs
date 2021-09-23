@@ -1,35 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using EastIndia.Models.Dtos;
 
 namespace EastIndia.Services
 {
     public class PriceCalculator
     {
-        public int CalculatePrice(int numberOfHops, Package package)
+        private const int IsWeaponsExtraPercentage = 20;
+        private const int IsAnimalExtraPercentage = 25;
+        private const int IsRefrigeratedExtraPercentage = 10;
+        private const int NovemberToAprilSeasonPrice = 8;
+        private const int MayToOctoberSeasonPrice = 5;
+
+        public double CalculatePrice(int numberOfHops, Package package)
         {
             var basePrice = GetPriceBasedOnSeasonAndWeight(package.Date);
             var sumOfExtraPercentages = GetSumOfExtraPercentages(package);
-            var fullPrice = basePrice * (1 + sumOfExtraPercentages);
+            var fullPrice = basePrice * (1 + (double) sumOfExtraPercentages/100);
             return fullPrice * numberOfHops;
         }
 
         public int GetSumOfExtraPercentages(Package package)
         {
             var sumOfExtraPercentages = 0;
-            if (package.IsWeapons) { sumOfExtraPercentages += 20; }
-            if (package.IsAnimals) { sumOfExtraPercentages += 25; }
-            if (package.IsRefrigerated) { sumOfExtraPercentages += 10; }
+            if (package.IsWeapons) { sumOfExtraPercentages += IsWeaponsExtraPercentage; }
+            if (package.IsAnimals) { sumOfExtraPercentages += IsAnimalExtraPercentage; }
+            if (package.IsRefrigerated) { sumOfExtraPercentages += IsRefrigeratedExtraPercentage; }
 
             return sumOfExtraPercentages;
         }
 
         public int GetPriceBasedOnSeasonAndWeight(DateTime date)
         {
-            var isNovemberAprilSeason = (date.Day >= 1 && date.Month >= 11) && (date.Day <= 31 && date.Month <= 4);
-            return isNovemberAprilSeason ? 8 : 5;
+            var isNovemberAprilSeason = (date.Day >= 1 && date.Month >= 11) 
+                                        || (date.Day <= 31 && date.Month <= 4);
+            return isNovemberAprilSeason ? NovemberToAprilSeasonPrice : MayToOctoberSeasonPrice;
         }
     }
 }
