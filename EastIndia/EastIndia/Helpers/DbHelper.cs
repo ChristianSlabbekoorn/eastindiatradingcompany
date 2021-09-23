@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Collections.Generic;
+
 using EastIndia.Models;
 
 namespace EastIndia.Helpers
@@ -10,6 +14,11 @@ namespace EastIndia.Helpers
 		public static T Get<T>(Guid id) where T : class
 		{
 			return entities.Set<T>().Find(id);
+		}
+
+		public static List<T> GetAll<T>(Expression<Func<T, bool>> predicate) where T : class
+		{
+			return entities.Set<T>().Where(predicate).ToList();
 		}
 
 		public static bool Insert<T>(T entity) where T : class
