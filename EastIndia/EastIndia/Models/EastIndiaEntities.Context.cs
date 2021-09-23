@@ -32,5 +32,6 @@ namespace EastIndia.Models
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<RouteHop> RouteHops { get; set; }
         public virtual DbSet<Weight> Weights { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
     }
 }

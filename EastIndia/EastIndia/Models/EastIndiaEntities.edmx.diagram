@@ -20,6 +20,7 @@
         <AssociationConnector Association="EastIndiaModel.FK_RouteHop_Package" ManuallyRouted="false" />
         <AssociationConnector Association="EastIndiaModel.FK_Price_Period" ManuallyRouted="false" />
         <AssociationConnector Association="EastIndiaModel.FK_Price_Weight" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EastIndiaModel.ErrorLog" Width="1.5" PointX="7.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
