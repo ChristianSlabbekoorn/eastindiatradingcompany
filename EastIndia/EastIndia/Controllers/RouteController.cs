@@ -1,4 +1,5 @@
 ﻿using EastIndia.Models.Dtos;
+using EastIndia.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace EastIndia.Controllers
     {
         public Route[] CalculateRoute([FromBody] Package body)
         {
+            RouteCalculator calculator = new RouteCalculator();
+            calculator.CalculateDistance();
+
             return new Route[] { new Route(), new Route() };
         }
 
