@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using EastIndia.Helpers;
 
 namespace EastIndia.Controllers
 {
@@ -177,7 +178,27 @@ namespace EastIndia.Controllers
 
         private int CalculatePrice(int numberOfHops, Package package)
         {
-            return 2137;
+            var basePrice = GetPriceBasedOnSeasonAndWeight(package.Date);
+            var sumOfExtraPercentages = GetSumOfExtraPercentages(package);
+            var fullPrice = basePrice * (1 + sumOfExtraPercentages);
+            return fullPrice * numberOfHops;
         }
+
+        private int GetSumOfExtraPercentages(Package package)
+        {
+            var sumOfExtraPercentages = 0;
+            if (package.IsWeapons) { sumOfExtraPercentages += 20; }
+            if (package.IsAnimals) { sumOfExtraPercentages += 25; }
+            if (package.IsRefrigerated) { sumOfExtraPercentages += 10; }
+
+            return sumOfExtraPercentages;
+        }
+
+        private int GetPriceBasedOnSeasonAndWeight(DateTime date)
+        {
+            var isNovemberAprilSeason = (date.Day >= 1 && date.Month >= 11) && (date.Day <= 31 && date.Month <= 4);
+            return isNovemberAprilSeason ? 8 : 5;
+        }
+
     }
 }

@@ -232,6 +232,7 @@
     <Compile Include="Managers\PriceManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
+    <Compile Include="Models\Dtos\Package.cs" />
     <Compile Include="Models\Dtos\PriceUpdate.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />
     <Compile Include="Models\Dtos\RouteDetails.cs" />
@@ -239,7 +240,6 @@
     <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\RouteHop.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />
-    <Compile Include="Models\Dtos\SeasonalPrice.cs" />
     <Compile Include="Models\EastIndiaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -284,6 +284,7 @@
       <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PriceCalculator.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
