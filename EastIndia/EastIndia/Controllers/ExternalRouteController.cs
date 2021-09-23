@@ -10,7 +10,7 @@ namespace EastIndia.Controllers
     public class ExternalRouteController : ApiController
     {
         [HttpGet]
-        public IEnumerable<string> GetAllRoutes()
+        public IEnumerable<RouteDetails> GetAllRoutes([FromBody] Package body)
         {
             return new List<string> 
             {
