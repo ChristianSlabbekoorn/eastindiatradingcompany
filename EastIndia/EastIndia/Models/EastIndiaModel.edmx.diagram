@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="e43364c9b1614b55919f5b69ea3a1dc7" Name="Diagram1">
-        <EntityTypeShape EntityType="EastIndiaModel.Location" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EastIndiaModel.LocationDistance" Width="1.5" PointX="7.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastIndiaModel.Location" Width="1.5" PointX="4.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastIndiaModel.LocationDistance" Width="1.5" PointX="7.125" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EastIndiaModel.Package" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EastIndiaModel.Period" Width="1.5" PointX="5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastIndiaModel.Period" Width="1.5" PointX="4.875" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="EastIndiaModel.Price" Width="1.5" PointX="0.625" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EastIndiaModel.RouteHop" Width="1.5" PointX="2.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EastIndiaModel.Weight" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="EastIndiaModel.ErrorLog" Width="1.5" PointX="6.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastIndiaModel.RouteHop" Width="1.5" PointX="2.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastIndiaModel.Weight" Width="1.5" PointX="2.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="EastIndiaModel.ErrorLog" Width="1.5" PointX="7" PointY="3.875" IsExpanded="true" />
         <AssociationConnector Association="EastIndiaModel.FK_LocationDistance_EndLocation" ManuallyRouted="false" />
         <AssociationConnector Association="EastIndiaModel.FK_LocationDistance_StartLocation" ManuallyRouted="false" />
         <AssociationConnector Association="EastIndiaModel.FK_RouteHop_EndLocation" ManuallyRouted="false" />
@@ -21,6 +21,13 @@
         <AssociationConnector Association="EastIndiaModel.FK_RouteHop_Package" ManuallyRouted="false" />
         <AssociationConnector Association="EastIndiaModel.FK_Price_Period" ManuallyRouted="false" />
         <AssociationConnector Association="EastIndiaModel.FK_Price_Weight" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EastIndiaModel.AspNetRole" Width="1.5" PointX="0.625" PointY="7.875" />
+        <EntityTypeShape EntityType="EastIndiaModel.AspNetUserClaim" Width="1.5" PointX="5.125" PointY="8.75" />
+        <EntityTypeShape EntityType="EastIndiaModel.AspNetUserLogin" Width="1.5" PointX="5.125" PointY="6.625" />
+        <EntityTypeShape EntityType="EastIndiaModel.AspNetUser" Width="1.5" PointX="2.875" PointY="6.625" />
+        <AssociationConnector Association="EastIndiaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="EastIndiaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="EastIndiaModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
