@@ -229,11 +229,12 @@
     </Compile>
     <Compile Include="Helpers\DbHelper.cs" />
     <Compile Include="Helpers\ErrorLogger.cs" />
-    <Compile Include="Integrations\IntegrationService.cs" />
+    <Compile Include="Managers\PriceManager.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
-    <Compile Include="Models\Dtos\Package.cs" />
-    <Compile Include="Models\Dtos\PackageTypePrice.cs" />
+    <Compile Include="Models\Dtos\PriceUpdate.cs" />
+    <Compile Include="Models\Dtos\RouteReport.cs" />
+    <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\Route.cs" />
     <Compile Include="Models\Dtos\RouteDetails.cs" />
     <Compile Include="Models\Dtos\RouteHop.cs" />
