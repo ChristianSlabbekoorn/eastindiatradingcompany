@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -181,7 +183,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ExternalRouteController.cs" />
+    <Compile Include="Controllers\GetAllRoutesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RouteController.cs" />
@@ -199,41 +201,47 @@
     <Compile Include="Models\Dtos\Route.cs" />
     <Compile Include="Models\Dtos\Package.cs" />
     <Compile Include="Models\Dtos\RouteHop.cs" />
-    <Compile Include="Models\EastIndiaEntities.Context.cs">
+    <Compile Include="Models\EastIndiaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EastIndiaEntities.Context.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EastIndiaEntities.cs">
+    <Compile Include="Models\EastIndiaModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EastIndiaEntities.Designer.cs">
-      <DependentUpon>EastIndiaEntities.edmx</DependentUpon>
+    <Compile Include="Models\EastIndiaModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>EastIndiaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ErrorLog.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Location.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LocationDistance.cs">
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Package.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Period.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Price.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Priority.cs" />
     <Compile Include="Models\RouteHop.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Weight.cs">
-      <DependentUpon>EastIndiaEntities.tt</DependentUpon>
+      <DependentUpon>EastIndiaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -251,8 +259,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\EastIndiaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EastIndiaModel.edmx</DependentUpon>
+      <LastGenOutput>EastIndiaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EastIndiaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EastIndiaModel.edmx</DependentUpon>
+      <LastGenOutput>EastIndiaModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\EastIndiaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EastIndiaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EastIndiaModel.edmx.diagram">
+      <DependentUpon>EastIndiaModel.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\wa-eit-dk1 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\wa-eit-dk1 - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\wa-eit-dk1 - Web Deploy.pubxml" />
@@ -319,7 +344,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Managers\Interfaces\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

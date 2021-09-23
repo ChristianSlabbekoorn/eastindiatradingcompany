@@ -296,6 +296,7 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <Property Name="RefrigeratedFee" Type="Decimal" Precision="4" Scale="3" />
           <Property Name="WeaponFee" Type="Decimal" Precision="4" Scale="3" />
           <Property Name="LiveAnimalFee" Type="Decimal" Precision="4" Scale="3" />
+          <Property Name="PricePerSegment" Type="Decimal" Precision="12" Scale="2" />
           <NavigationProperty Name="Packages" Relationship="Self.FK_Package_Price" FromRole="Price" ToRole="Package" />
           <NavigationProperty Name="Period" Relationship="Self.FK_Price_Period" FromRole="Price" ToRole="Period" />
           <NavigationProperty Name="Weight" Relationship="Self.FK_Price_Weight" FromRole="Price" ToRole="Weight" />
@@ -312,8 +313,8 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <Property Name="HopNo" Type="Byte" />
           <Property Name="TotalHops" Type="Byte" />
           <Property Name="Shipped" Type="Boolean" />
-          <NavigationProperty Name="EndLocations" Relationship="Self.FK_RouteHop_EndLocation" FromRole="RouteHop" ToRole="Location" />
-          <NavigationProperty Name="StartLocations" Relationship="Self.FK_RouteHop_StartLocation" FromRole="RouteHop" ToRole="Location" />
+          <NavigationProperty Name="EndLocation" Relationship="Self.FK_RouteHop_EndLocation" FromRole="RouteHop" ToRole="Location" />
+          <NavigationProperty Name="StartLocation" Relationship="Self.FK_RouteHop_StartLocation" FromRole="RouteHop" ToRole="Location" />
           <NavigationProperty Name="Package" Relationship="Self.FK_RouteHop_Package" FromRole="RouteHop" ToRole="Package" />
         </EntityType>
         <EntityType Name="Weight">
@@ -324,6 +325,14 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <Property Name="MinWeight" Type="Decimal" Precision="3" Scale="0" />
           <Property Name="MaxWeight" Type="Decimal" Precision="3" Scale="0" />
           <NavigationProperty Name="Prices" Relationship="Self.FK_Price_Weight" FromRole="Weight" ToRole="Price" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Error" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_LocationDistance_EndLocation">
           <End Role="Location" Type="Self.Location" Multiplicity="0..1" />
@@ -421,7 +430,7 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EastIndiaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="LocationDistances" EntityType="Self.LocationDistance" />
           <EntitySet Name="Packages" EntityType="Self.Package" />
@@ -429,6 +438,7 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
           <EntitySet Name="Prices" EntityType="Self.Price" />
           <EntitySet Name="RouteHops" EntityType="Self.RouteHop" />
           <EntitySet Name="Weights" EntityType="Self.Weight" />
+          <EntitySet Name="ErrorLogs" EntityType="Self.ErrorLog" />
           <AssociationSet Name="FK_LocationDistance_EndLocation" Association="Self.FK_LocationDistance_EndLocation">
             <End Role="Location" EntitySet="Locations" />
             <End Role="LocationDistance" EntitySet="LocationDistances" />
@@ -476,7 +486,7 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EastIndiaModelStoreContainer" CdmEntityContainer="EastIndiaEntities">
+        <EntityContainerMapping StorageEntityContainer="EastIndiaModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="EastIndiaModel.Location">
               <MappingFragment StoreEntitySet="Location">
@@ -532,6 +542,7 @@ warning 6002: The table/view 'dbs-eit-dk1.dbo.ErrorLog' does not have a primary 
                 <ScalarProperty Name="RefrigeratedFee" ColumnName="RefrigeratedFee" />
                 <ScalarProperty Name="WeaponFee" ColumnName="WeaponFee" />
                 <ScalarProperty Name="LiveAnimalFee" ColumnName="LiveAnimalFee" />
+                <ScalarProperty Name="PricePerSegment" ColumnName="PricePerSegment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

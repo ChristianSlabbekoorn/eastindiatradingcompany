@@ -13,10 +13,10 @@ namespace EastIndia.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EastIndiaEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public EastIndiaEntities()
-            : base("name=EastIndiaEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
