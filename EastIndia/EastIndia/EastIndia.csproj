@@ -189,6 +189,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Dtos\ExternalRouteDetails.cs" />
     <Compile Include="Models\Dtos\PackageTypePrice.cs" />
     <Compile Include="Models\Dtos\SeasonalPrice.cs" />
     <Compile Include="Models\Dtos\RouteReport.cs" />

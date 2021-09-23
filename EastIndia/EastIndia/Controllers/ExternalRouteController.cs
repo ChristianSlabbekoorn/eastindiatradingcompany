@@ -11,26 +11,24 @@ namespace EastIndia.Controllers
     public class ExternalRouteController : ApiController
     {
         [HttpGet]
-        public IEnumerable<RouteDetails> GetAllRoutes([FromBody] Package body)
+        public IEnumerable<ExternalRouteDetails> GetAllRoutes([FromBody] Package body)
         {
-            return new List<RouteDetails> 
+            return new List<ExternalRouteDetails> 
             {
-                new RouteDetails() 
+                new ExternalRouteDetails() 
                 {
-                    FromCity = Guid.NewGuid(),
-                    ToCity = Guid.NewGuid(),
-                    Distance = 42,
-                    Price = 42,
-                    Time = 42
+                    Start = Guid.NewGuid().ToString(),
+                    Stop = Guid.NewGuid().ToString(),
+                    Price = 42.ToString(),
+                    Duration = 42.ToString()
 
                 },
-                new RouteDetails() 
+                new ExternalRouteDetails() 
                 {
-                    FromCity = Guid.NewGuid(),
-                    ToCity = Guid.NewGuid(),
-                    Distance = 42,
-                    Price = 42,
-                    Time = 42
+                    Start = Guid.NewGuid().ToString(),
+                    Stop = Guid.NewGuid().ToString(),
+                    Price = 42.ToString(),
+                    Duration = 42.ToString()
                 }
             };
         }
