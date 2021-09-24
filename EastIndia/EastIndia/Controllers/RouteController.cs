@@ -15,22 +15,9 @@ namespace EastIndia.Controllers
         [System.Web.Mvc.HttpPost]
         public ActionResult CalculateRoute(Package body)
         {
-            var routeCalculator = new RouteCalculator();
-            routeCalculator.CalculateDistance(body);
-            var routes = new List<ExternalRouteDetails> { new ExternalRouteDetails()
-            {
-                Start = "Cairo",
-                Stop = "Kapstaden",
-                Duration = "60",
-                Price = "1000"
-            }, new ExternalRouteDetails()
-            {
-                Start = "Hvalbugten",
-                Stop = "Kapstaden",
-                Duration = "60",
-                Price = "1200"
-            } };
-            return View("Results", routes);
+            RouteCalculator routeCalculator = new RouteCalculator();
+            ExternalRouteDetails response = routeCalculator.CalculateRoutes(body);
+            return View("Results", response);
 
         }
 
