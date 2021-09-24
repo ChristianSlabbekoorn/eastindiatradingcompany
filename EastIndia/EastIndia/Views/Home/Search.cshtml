@@ -102,7 +102,7 @@
                 @Html.LabelFor(m => m.Weight, new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
                     @Html.ValidationMessageFor(m => m.Weight, "", new { @class = "text-danger" })
-                    <input class="form-control" id="Weight" name="Weight" type="text" value="" style="margin-bottom: 10px" placeholder="Weight">
+                    <input class="form-control" id="Weight" name="Weight" type="text" value="" style="margin-bottom: 10px" placeholder="Weight" required>
                 </div>
             </div>
 
