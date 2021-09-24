@@ -11,7 +11,8 @@ namespace EastIndia.Controllers
 {
     public class RouteController : Controller
     {
-        public ExternalRouteDetails[] CalculateRoute([FromBody] Package body)
+        [System.Web.Mvc.HttpPost]
+        public ExternalRouteDetails[] CalculateRoute(Package body)
         {
             RouteCalculator routeCalculator = new RouteCalculator();
             routeCalculator.CalculateDistance(body);

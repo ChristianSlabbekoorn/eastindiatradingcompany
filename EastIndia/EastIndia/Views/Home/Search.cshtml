@@ -1,15 +1,42 @@
-﻿@{
+﻿@model EastIndia.Models.Dtos.Package
+
+
+@{
 	ViewBag.Title = "Search";
 }
 <h1 style="text-align:center">Search for routes</h1>
 
 
 <div class="row">
-	<div class="col-md-10">
-		<input class="form-control" id="From" name="From" type="text" value="" style="margin-bottom:10px" placeholder="From">
-		<input class="form-control" id="To" name="To" type="text" value="" style="margin-bottom:10px" placeholder="To">
-		<input class="form-control" id="Weight" name="Weight" type="text" value="" style="margin-bottom:10px" placeholder="Weight">
-	</div>
+    <div class="col-md-10">
+        @using (Html.BeginForm("CalculateRoute", "Route", new {ReturnUrl = ViewBag.ReturnUrl}, FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
+        {
+            @Html.AntiForgeryToken()
+
+            <hr/>
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(m => m.FromCity, new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.FromCity, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.FromCity, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ToCity, new {@class = "col-md-2 control-label"})
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.ToCity, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.ToCity, "", new {@class = "text-danger"})
+                </div>
+            </div>
+			<div class="col-md-10">
+				<input type="submit" value="Search"  class="btn btn-default">
+			</div>
+        }
+        @*<input class="form-control" id="From" name="From" type="text" value="" style="margin-bottom: 10px" placeholder="From">
+        <input class="form-control" id="To" name="To" type="text" value="" style="margin-bottom: 10px" placeholder="To">
+        <input class="form-control" id="Weight" name="Weight" type="text" value="" style="margin-bottom: 10px" placeholder="Weight">*@
+    </div>
 	@*<div class="col-md-10">
 			<p>Type:</p>
 			<input type="radio" id="frogile" name="frogile" value="HTML">
@@ -54,7 +81,5 @@
 
 
 	</div>
-	<div class="col-md-10">
-		<input type="submit" value="Search" onclick="window.location.href = '/Home/Confirmation';" class="btn btn-default">
-	</div>
+	
 </div>
