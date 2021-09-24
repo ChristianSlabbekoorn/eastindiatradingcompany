@@ -15,16 +15,19 @@ using EastIndia.Models;
 using EastIndia.Models.Dtos;
 using RouteHop = EastIndia.Models.Dtos.RouteHop;
 using Package = EastIndia.Models.Dtos.Package;
+using EastIndia.Integrations;
 
 namespace EastIndia.Services
 {
     public class RouteCalculator
     {
         private DbHelper dbHelper;
+        private IntegrationService externalIntegration;
 
         public RouteCalculator()
         {
             dbHelper = new DbHelper();
+            externalIntegration = new IntegrationService();
         }
 
         public ExternalRouteDetails CalculateRoutes(Package package)
@@ -33,22 +36,43 @@ namespace EastIndia.Services
 
             List<Edge> edges = GetEdges(locations);
 
-            string from = dbHelper.Get<Location>(package.FromCity.Value).Name;
-            string to = dbHelper.Get<Location>(package.ToCity.Value).Name;
+            var from = dbHelper.Get<Location>(package.FromCity.Value);
+            var to = dbHelper.Get<Location>(package.ToCity.Value);
 
+            (string, string, double) shortestRoute;
 
-            (string, string, double) shortestRoute = CalculateDistance((from, to), edges);
-
-            PriceCalculator priceCalculator = new PriceCalculator();
-
-
-            return new ExternalRouteDetails() 
+            try
             {
-                Start = shortestRoute.Item1,
-                Stop = shortestRoute.Item2,
-                Duration = FormatTime((shortestRoute.Item3 * 12).ToString()),
-                Price = priceCalculator.CalculatePrice((int)shortestRoute.Item3, package).ToString()
-        };
+                shortestRoute = CalculateDistance((from.Name, to.Name), edges);
+
+                PriceCalculator priceCalculator = new PriceCalculator();
+
+                return new ExternalRouteDetails()
+                {
+                    Start = shortestRoute.Item1,
+                    Stop = shortestRoute.Item2,
+                    Duration = FormatTime((shortestRoute.Item3 * 12).ToString()),
+                    Price = priceCalculator.CalculatePrice((int)shortestRoute.Item3, package).ToString()
+                };
+            }
+            catch (Exception e)
+            {
+                List<ExternalRouteDetails> routes = externalIntegration.GetAllRoutes(MapPackage(package), Vendor.TelstarLogistics);
+
+                List<double> prices = new List<double>();
+                List<double> distance = new List<double>();
+
+                prices.AddRange(routes.Select(x => double.Parse(x.Price)));
+                distance.AddRange(routes.Select(x => double.Parse(x.Duration)));
+
+                return new ExternalRouteDetails()
+                {
+                    Start = from.Name,
+                    Stop = to.Name,
+                    Price = prices.Sum().ToString(),
+                    Duration = distance.Sum().ToString()
+                };
+            } 
         }
 
 
@@ -72,11 +96,11 @@ namespace EastIndia.Services
             Vertex from = CreateVertex(cities.Item1);
             Vertex to = CreateVertex(cities.Item2);
 
-            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(from, to, 50);
+            IList<Path> shortestPathsAlgorithm = pathFinder.FindShortestPaths(from, to, 50);
 
             List<(string, string, double)> shortestPaths = new List<(string, string, double)>();
 
-            foreach (Path shortestPath in shortestPathsFromOsakatoSendai)
+            foreach (Path shortestPath in shortestPathsAlgorithm)
             {
                 foreach (Edge edge in shortestPath.EdgesForPath)
                 {
@@ -138,6 +162,23 @@ namespace EastIndia.Services
             }
 
             return edges;
+        }
+
+        private ExternalPackage MapPackage(Package package)
+        {
+            return new ExternalPackage()
+            {
+                Date = package.Date,
+                Depth = 0,
+                Height = 0,
+                Width = 0,
+                Weight = package.Weight,
+                IsAnimals = package.IsAnimals,
+                IsCautious = package.IsCautious,
+                IsRecorded = package.IsRecorded,
+                IsRefrigerated = package.IsRefrigerated,
+                IsWeapons = package.IsWeapons
+            };
         }
     }
 }

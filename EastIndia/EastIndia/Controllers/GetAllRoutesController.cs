@@ -181,6 +181,7 @@ namespace EastIndia.Controllers
             };
 
         }
+
         private int CalculateDuration(int numberOfHops)
         {
             return numberOfHops * 12 * 60;
