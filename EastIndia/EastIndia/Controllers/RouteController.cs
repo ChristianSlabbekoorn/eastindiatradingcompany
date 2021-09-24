@@ -11,11 +11,11 @@ namespace EastIndia.Controllers
 {
     public class RouteController : Controller
     {
-        public ExternalRouteDetails[] CalculateRoute([FromBody] Package body)
+        public ExternalRouteDetails CalculateRoute([FromBody] Package body)
         {
             RouteCalculator routeCalculator = new RouteCalculator();
-            routeCalculator.CalculateDistance(body);
-            return new ExternalRouteDetails[] { new ExternalRouteDetails(), new ExternalRouteDetails() };
+            ExternalRouteDetails response = routeCalculator.CalculateRoutes(body);
+            return response;
         }
 
         public bool GenerateFile([FromBody] RouteReport body)

@@ -13,100 +13,121 @@ using static Programmerare.ShortestPaths.Core.Impl.GraphImpl;
 using EastIndia.Helpers;
 using EastIndia.Models;
 using EastIndia.Models.Dtos;
+using RouteHop = EastIndia.Models.Dtos.RouteHop;
+using Package = EastIndia.Models.Dtos.Package;
 
 namespace EastIndia.Services
 {
     public class RouteCalculator
     {
-        public void CalculateDistance(Models.Dtos.Package package)
+        private DbHelper dbHelper;
+
+        public RouteCalculator()
+        {
+            dbHelper = new DbHelper();
+        }
+
+        public ExternalRouteDetails CalculateRoutes(Package package)
+        {
+            List<Location> locations = GetLocations(package);
+
+            List<Edge> edges = GetEdges(locations);
+
+            string from = dbHelper.Get<Location>(package.FromCity.Value).Name;
+            string to = dbHelper.Get<Location>(package.ToCity.Value).Name;
+
+
+            (string, string, double) shortestRoute = CalculateDistance((from, to), edges);
+
+            PriceCalculator priceCalculator = new PriceCalculator();
+
+
+            return new ExternalRouteDetails() 
+            {
+                Start = shortestRoute.Item1,
+                Stop = shortestRoute.Item2,
+                Duration = (shortestRoute.Item3 * 12).ToString(),
+                Price = priceCalculator.CalculatePrice((int)shortestRoute.Item3, package).ToString()
+        };
+        }
+
+        public (string, string, double) CalculateDistance((string, string) cities, List<Edge> edges)
         {
             PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();
-
-            Vertex Tokyo = CreateVertex("Tokyo");
-            Vertex Osaka = CreateVertex("Osaka");
-            Vertex Kyoto = CreateVertex("Kyoto");
-            Vertex Sendai = CreateVertex("Sendai");
-
-            Edge TokyoOsaka = CreateEdge(Tokyo, Osaka, CreateWeight(7));
-            Edge TokyoKyoto = CreateEdge(Tokyo, Kyoto, CreateWeight(6));
-            Edge TokyoSendai = CreateEdge(Tokyo, Sendai, CreateWeight(4));
-            Edge OsakaKyoto = CreateEdge(Osaka, Kyoto, CreateWeight(3));
-            Edge OsakaSendai = CreateEdge(Osaka, Sendai, CreateWeight(9));
-            Edge KyotoSendai = CreateEdge(Kyoto, Sendai, CreateWeight(8));
-
-            Edge OsakaTokyo = CreateEdge(Osaka, Tokyo, CreateWeight(7));
-            Edge KyotoTokyo = CreateEdge(Kyoto, Tokyo, CreateWeight(6));
-            Edge SendaiTokyo = CreateEdge(Sendai, Tokyo, CreateWeight(4));
-            Edge KyotoOsaka = CreateEdge(Kyoto, Osaka, CreateWeight(3));
-            Edge SendaiOsaka = CreateEdge(Sendai, Osaka, CreateWeight(9));
-            Edge SendaiKyoto = CreateEdge(Sendai, Kyoto, CreateWeight(8));
-
-            IList<Edge> edges = new List<Edge>()
-            {
-                TokyoOsaka,
-                TokyoKyoto,
-                TokyoSendai,
-                OsakaKyoto,
-                OsakaSendai,
-                KyotoSendai,
-                OsakaTokyo,
-                KyotoTokyo,
-                SendaiTokyo,
-                KyotoOsaka,
-                SendaiOsaka,
-                SendaiKyoto
-            };
 
             Graph graph = CreateGraph(edges);
 
             PathFinder pathFinder = pathFinderFactory.CreatePathFinder(graph);
 
-            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(Osaka, Sendai, 1);
+            Vertex from = CreateVertex(cities.Item1);
+            Vertex to = CreateVertex(cities.Item2);
 
-            List<(string, string)> shortestPaths = new List<(string, string)>();
+            IList<Path> shortestPathsFromOsakatoSendai = pathFinder.FindShortestPaths(from, to, 50);
+
+            List<(string, string, double)> shortestPaths = new List<(string, string, double)>();
 
             foreach (Path shortestPath in shortestPathsFromOsakatoSendai)
             {
                 foreach (Edge edge in shortestPath.EdgesForPath)
                 {
-                    shortestPaths.Add((edge.StartVertex.VertexId, edge.EndVertex.VertexId));
+                    shortestPaths.Add((edge.StartVertex.VertexId, edge.EndVertex.VertexId, edge.EdgeWeight.WeightValue));
                 }
             }
 
-            GetAllLocations();
-        }
+            List<(string, string, double)> shortestChain = new List<(string, string, double)>();
 
-        public void GetAllLocations()
-        {
-            DbHelper dbHelper = new DbHelper();
-
-            // Locations are: Dakar, St.Helena, Sierra Leone
-            List<Location> locations = new List<Location>();
-            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
-            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
-            locations.Add(dbHelper.Get<Location>(Guid.NewGuid()));
-
-        }
-    }
-
-    public static class MyExtensionMethods
-    {
-        public static string GetPathAsPrettyPrintedStringForConsoleOutput(this Path path)
-        {
-            var sb = new StringBuilder();
-            IList<Edge> edges = path.EdgesForPath;
-            sb.Append(path.TotalWeightForPath.WeightValue + " ( ");
-            for (int i = 0; i < edges.Count; i++)
+            foreach ((string, string, double) pathWithWeight in shortestPaths)
             {
-                if (i > 0) sb.Append(" + ");
-                sb.Append(edges[i].GetEdgeAsPrettyPrintedStringForConsoleOutput());
+                shortestChain.Add(pathWithWeight);
+                if (pathWithWeight.Item2 == cities.Item2) break;
             }
-            sb.Append(")");
-            return sb.ToString();
+
+            List<double> hops = new List<double>();
+            foreach ((string, string, double) hop in shortestChain)
+            {
+                hops.Add(hop.Item3);
+            }
+
+            return (cities.Item1, cities.Item2, hops.Sum());
         }
-        private static string GetEdgeAsPrettyPrintedStringForConsoleOutput(this Edge edge)
+
+        public List<Location> GetLocations(Package package)
         {
-            return edge.EdgeWeight.WeightValue + " [" + edge.StartVertex.VertexId + "--->" + edge.EndVertex.VertexId + "] ";
+            return dbHelper.GetAll<Location>(x => x.Name != null);
+        }
+
+        private List<Edge> GetEdges(List<Location> locations)
+        {
+            List<(Vertex, Vertex)> vertices = new List<(Vertex, Vertex)>();
+            List<LocationDistance> hops = new List<LocationDistance>();
+            LocationDistance location = dbHelper.Get<LocationDistance>(Guid.NewGuid());
+
+            foreach(Location startLoc in locations)
+            {
+                foreach (Location endLoc in locations) 
+                {
+                    if (startLoc != endLoc)
+                    {
+                        LocationDistance locationDistance = dbHelper.GetAll<LocationDistance>(x => x.StartLocationID == startLoc.ID && x.EndLocationID == endLoc.ID && x.ConnectionType == (int)ConnectionType.Sea).FirstOrDefault();
+                        if (locationDistance != null) 
+                        {
+                            hops.Add(locationDistance);
+                            Vertex from = CreateVertex(startLoc.Name);
+                            Vertex to = CreateVertex(endLoc.Name);
+                            vertices.Add((from, to));
+                        }
+                    }
+                }
+            }
+
+            List<Edge> edges = new List<Edge>();
+
+            foreach (LocationDistance hop in hops)
+            {
+                edges.Add(CreateEdge(CreateVertex(hop.StartLocation.Name), CreateVertex(hop.EndLocation.Name), CreateWeight(Convert.ToDouble(hop.Segments))));
+            }
+
+            return edges;
         }
     }
 }
