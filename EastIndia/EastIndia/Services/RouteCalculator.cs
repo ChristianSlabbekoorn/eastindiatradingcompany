@@ -46,11 +46,21 @@ namespace EastIndia.Services
             {
                 Start = shortestRoute.Item1,
                 Stop = shortestRoute.Item2,
-                Duration = (shortestRoute.Item3 * 12).ToString(),
+                Duration = FormatTime((shortestRoute.Item3 * 12).ToString()),
                 Price = priceCalculator.CalculatePrice((int)shortestRoute.Item3, package).ToString()
         };
         }
 
+
+        private string FormatTime(string duration)
+        {
+            var durationAsDouble = double.Parse(duration);
+            var timeSpan = TimeSpan.FromHours(durationAsDouble);
+            double hh = timeSpan.TotalHours;
+            var mm = timeSpan.Minutes;
+
+            return hh == 0 ? $"{mm}m" : $"{hh}h {mm}m";
+        }
         public (string, string, double) CalculateDistance((string, string) cities, List<Edge> edges)
         {
             PathFinderFactory pathFinderFactory = new PathFinderFactoryYanQi();

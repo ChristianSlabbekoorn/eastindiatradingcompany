@@ -8,7 +8,7 @@
 @foreach (var item in Model) {
     <section>
         <div class="mourphism">
-            <h4 class="time">12 h 30 min</h4>
+            <h4 class="time">@item.Duration</h4>
             <img src="/Content/timeline.svg" class="timeline" />
             <h4 class="place-l">@item.Start</h4>
             <h4 class="place-r">@item.Stop</h4>

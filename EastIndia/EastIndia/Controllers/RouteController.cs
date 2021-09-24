@@ -16,8 +16,8 @@ namespace EastIndia.Controllers
         public ActionResult CalculateRoute(Package body)
         {
             RouteCalculator routeCalculator = new RouteCalculator();
-            ExternalRouteDetails response = routeCalculator.CalculateRoutes(body);
-            return View("Results", response);
+            var response = routeCalculator.CalculateRoutes(body);
+            return View("Results", new List<ExternalRouteDetails>() { response });
 
         }
 
