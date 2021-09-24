@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 using System.Web.Mvc;
 
@@ -12,11 +13,25 @@ namespace EastIndia.Controllers
     public class RouteController : Controller
     {
         [System.Web.Mvc.HttpPost]
-        public ExternalRouteDetails[] CalculateRoute(Package body)
+        public ActionResult CalculateRoute(Package body)
         {
-            RouteCalculator routeCalculator = new RouteCalculator();
+            var routeCalculator = new RouteCalculator();
             routeCalculator.CalculateDistance(body);
-            return new ExternalRouteDetails[] { new ExternalRouteDetails(), new ExternalRouteDetails() };
+            var routes = new List<ExternalRouteDetails> { new ExternalRouteDetails()
+            {
+                Start = "Cairo",
+                Stop = "Kapstaden",
+                Duration = "60",
+                Price = "1000"
+            }, new ExternalRouteDetails()
+            {
+                Start = "Hvalbugten",
+                Stop = "Kapstaden",
+                Duration = "60",
+                Price = "1200"
+            } };
+            return View("Results", routes);
+
         }
 
         public bool GenerateFile([FromBody] RouteReport body)

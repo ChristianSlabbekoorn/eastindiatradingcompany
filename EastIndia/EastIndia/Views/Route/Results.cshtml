@@ -1,0 +1,27 @@
+﻿@model List<EastIndia.Models.Dtos.ExternalRouteDetails>
+
+@{
+    ViewBag.Title = "Results";
+}
+<h2 class="text-center">@ViewBag.Title</h2>
+<br />
+@foreach (var item in Model) {
+    <section>
+        <div class="mourphism">
+            <h4 class="time">12 h 30 min</h4>
+            <img src="/Content/timeline.svg" class="timeline" />
+            <h4 class="place-l">@item.Start</h4>
+            <h4 class="place-r">@item.Stop</h4>
+            <br />
+            <button class="btn-m btn-default" onclick="window.location.href = '/Home/Confirmation';">CHOOSE SHIPPING</button>
+            <h3 class="price">@item.Price $</h3>
+
+        </div>
+
+    </section>
+    <br>
+}
+
+
+<section>
+</section>
