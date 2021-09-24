@@ -19,6 +19,9 @@ namespace EastIndia
 
             locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Sierra Leone"));
             locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Dakar"));
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Hvalbugten"));
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Kapstaden"));
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "De Kanariske Oeer"));
         }
     }
 }
