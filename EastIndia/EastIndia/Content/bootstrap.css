@@ -50,6 +50,13 @@
     box-shadow: 20px 20px 60px #c4c4c4, -20px -20px 60px #ffffff;
 }
 
+.confirmed {
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
 
 .place-l {
     text-align: left;
@@ -110,9 +117,9 @@
     color
 }
 html {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+    font-family: Comfortaa;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 body {
   margin: 0;
@@ -222,8 +229,8 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
+    font-family: Comfortaa;
+    font-size: 1em;
 }
 button,
 input,
@@ -1195,11 +1202,11 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
-  color: #333333;
-  background-color: #fff;
+    font-family: Comfortaa, Roboto;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333333;
+    background-color: #fff;
 }
 input,
 button,
@@ -3263,6 +3270,28 @@ select[multiple].input-lg {
     background-image: none;
     border: 1px solid transparent;
     padding: 15px 30px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 10px;
+}
+
+.btn-c {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 15px 150px;
     font-size: 14px;
     line-height: 1.42857143;
     -webkit-user-select: none;
