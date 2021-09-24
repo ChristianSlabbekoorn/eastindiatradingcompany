@@ -22,6 +22,8 @@ namespace EastIndia
             locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Hvalbugten"));
             locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Kapstaden"));
             locations.Add(dbHelper.GetAll<Location>(x => x.Name == "De Kanariske Oeer"));
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Cairo"));
+            locations.Add(dbHelper.GetAll<Location>(x => x.Name == "Zanzibar"));
         }
     }
 }
