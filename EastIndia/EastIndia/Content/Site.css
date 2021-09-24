@@ -63,6 +63,8 @@ textarea {
     background-color: #eee;
 }
 
+
+
 .mourphism {
     padding-bottom: 45px;
     padding-top: 40px;
@@ -95,6 +97,13 @@ textarea {
 .time {
     text-align: center;
     font-weight: bold;
+}
+
+.checkbox {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* On mouse-over, add a grey background color */
@@ -229,6 +238,53 @@ samp {
     background-image: none;
     border: 1px solid transparent;
     padding: 15px 150px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 10px;
+}
+
+.btn-l {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 5px 20px;
+    font-size: 10px;
+    line-height: 1.42857143;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 10px;
+    position: absolute;
+    left: 270px;
+
+}
+
+.btn-l-o {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 15px 130px;
     font-size: 14px;
     line-height: 1.42857143;
     -webkit-user-select: none;
